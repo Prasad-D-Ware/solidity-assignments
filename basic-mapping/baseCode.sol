@@ -3,11 +3,13 @@ pragma solidity ^0.8.0;
 
 contract UserBalance {
 
-    function deposit(uint256 amount) public {
+    mapping(address => uint) private balances;
 
+    function deposit(uint256 amount) public {
+        balances[msg.sender] += amount;
     }
 
     function getBalance() public view returns (uint256) {
-        
+        return balances[msg.sender];
     }
 }
