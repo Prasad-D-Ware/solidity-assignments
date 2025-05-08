@@ -2,14 +2,22 @@
 pragma solidity ^0.8.0;
 
 contract Wallet {
+    address payable owner;
 
-    function deposit() public payable {}
+    constructor(){
+        owner = payable(msg.sender);
+    }
 
-    function withdrawAll() public {
+    function deposit() public payable {
+        
+    }
 
+    function withdrawAll() public payable {
+        require(msg.sender == owner);
+         owner.transfer(address(this).balance);
     }
 
     function getBalance() public view returns (uint256) {
-
+        return address(this).balance;
     }
 }
